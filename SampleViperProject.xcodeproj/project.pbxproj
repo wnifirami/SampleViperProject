@@ -16,6 +16,10 @@
 		EA3DF05426B6CCD200B86DBB /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF05326B6CCD200B86DBB /* Presenter.swift */; };
 		EA3DF05626B6CCDC00B86DBB /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF05526B6CCDC00B86DBB /* Entity.swift */; };
 		EA3DF05826B6CCE800B86DBB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF05726B6CCE800B86DBB /* Router.swift */; };
+		EA3DF05A26B6D9AA00B86DBB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF05926B6D9AA00B86DBB /* MainView.swift */; };
+		EA3DF05D26B6DAAC00B86DBB /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF05C26B6DAAC00B86DBB /* UserItem.swift */; };
+		EA3DF06026B6DB8D00B86DBB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF05F26B6DB8D00B86DBB /* Constants.swift */; };
+		EA3DF06326B6EE7D00B86DBB /* UserServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DF06226B6EE7D00B86DBB /* UserServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		EA3DF05326B6CCD200B86DBB /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		EA3DF05526B6CCDC00B86DBB /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		EA3DF05726B6CCE800B86DBB /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		EA3DF05926B6D9AA00B86DBB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		EA3DF05C26B6DAAC00B86DBB /* UserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItem.swift; sourceTree = "<group>"; };
+		EA3DF05F26B6DB8D00B86DBB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EA3DF06226B6EE7D00B86DBB /* UserServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 		EA3DF03826B6CC5400B86DBB /* SampleViperProject */ = {
 			isa = PBXGroup;
 			children = (
+				EA3DF05E26B6DB8100B86DBB /* Utils */,
 				EA3DF04E26B6CC9E00B86DBB /* VIPER */,
 				EA3DF04D26B6CC5E00B86DBB /* Delegates */,
 				EA3DF04226B6CC5600B86DBB /* Assets.xcassets */,
@@ -83,6 +92,8 @@
 		EA3DF04E26B6CC9E00B86DBB /* VIPER */ = {
 			isa = PBXGroup;
 			children = (
+				EA3DF06126B6EE6C00B86DBB /* Services */,
+				EA3DF05B26B6DA8700B86DBB /* SwiftUIFiles */,
 				EA3DF04F26B6CCBE00B86DBB /* View.swift */,
 				EA3DF05126B6CCC600B86DBB /* Interactor.swift */,
 				EA3DF05326B6CCD200B86DBB /* Presenter.swift */,
@@ -90,6 +101,31 @@
 				EA3DF05726B6CCE800B86DBB /* Router.swift */,
 			);
 			name = VIPER;
+			sourceTree = "<group>";
+		};
+		EA3DF05B26B6DA8700B86DBB /* SwiftUIFiles */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DF05926B6D9AA00B86DBB /* MainView.swift */,
+				EA3DF05C26B6DAAC00B86DBB /* UserItem.swift */,
+			);
+			name = SwiftUIFiles;
+			sourceTree = "<group>";
+		};
+		EA3DF05E26B6DB8100B86DBB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DF05F26B6DB8D00B86DBB /* Constants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		EA3DF06126B6EE6C00B86DBB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DF06226B6EE7D00B86DBB /* UserServices.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,8 +198,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3DF05826B6CCE800B86DBB /* Router.swift in Sources */,
+				EA3DF06326B6EE7D00B86DBB /* UserServices.swift in Sources */,
+				EA3DF05A26B6D9AA00B86DBB /* MainView.swift in Sources */,
+				EA3DF05D26B6DAAC00B86DBB /* UserItem.swift in Sources */,
 				EA3DF05426B6CCD200B86DBB /* Presenter.swift in Sources */,
 				EA3DF05026B6CCBE00B86DBB /* View.swift in Sources */,
+				EA3DF06026B6DB8D00B86DBB /* Constants.swift in Sources */,
 				EA3DF05626B6CCDC00B86DBB /* Entity.swift in Sources */,
 				EA3DF05226B6CCC600B86DBB /* Interactor.swift in Sources */,
 				EA3DF03A26B6CC5400B86DBB /* AppDelegate.swift in Sources */,

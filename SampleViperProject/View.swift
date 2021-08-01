@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 // MARK: - View
 
 // ViewController
@@ -16,82 +17,43 @@ import UIKit
 // MARK: - Protocol
 protocol AnyView {
     var presenter: AnyPresenter? { get set}
-    
     func update(with users: Users)
     func update(with error: String)
 }
 // MARK: - View
 class UserViewController: UIViewController, AnyView {
-    var presenter: AnyPresenter?
-    var users: Users = [] {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.isHidden = self.users.isEmpty
-                self.label.isHidden = !self.users.isEmpty
-                self.tableView.reloadData()
-            }
-        }
-    }
-    lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.register(UITableViewCell.self,
-                       forCellReuseIdentifier: "cell")
-        table.isHidden = true
-        return table
-    }()
+    var contenant: MainView?
     
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.text = "Ooops no data :3"
-        label.textAlignment = .center
-        label.isHidden = true
-        return label
-    }()
+    var presenter: AnyPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
         view.backgroundColor = .white
     }
+
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        tableView.frame = view.bounds
-        label.frame = CGRect(x: 0, y: 0, width: 200, height: 60)
-        label.center = view.center
-       
-    }
-    
-    private func setup() {
-        view.addSubview(tableView)
-        view.addSubview(label)
-        tableView.delegate = self
-        tableView.dataSource = self
+    private func setup(with users: Users) {
+        contenant = MainView( users: users)
+        let child = UIHostingController(rootView:contenant)
+        if !view.subviews.filter({$0 is MainView}).isEmpty {
+            _ = view.subviews.map({$0.removeFromSuperview()})
+        }
+        child.view.translatesAutoresizingMaskIntoConstraints = false
+        child.view.frame = self.view.bounds
+        self.view.addSubview(child.view)
+        self.addChild(child)
     }
     
     func update(with users: Users) {
-        self.users = users
+        DispatchQueue.main.async {
+            self.setup(with: users)
+        }
     }
     
     func update(with error: String) {
-        self.users = []
+        DispatchQueue.main.async {
+            self.setup(with: [])
+        }
         
     }
-    
-    
-}
-
-// MARK: - TableView
-extension UserViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        users.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = users[indexPath.row].name
-        return cell
-    }
-    
-    
 }

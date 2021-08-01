@@ -6,36 +6,36 @@
 //
 
 import Foundation
+import Combine
 // object
 // protocol
 // ref to presenter
 protocol AnyInteractor {
     var presenter: AnyPresenter? { get set}
-    
+    var userService: UserServiceProtocol? { get set }
     func getUsers()
 }
 
 class UserInteractor: AnyInteractor {
+    var userService: UserServiceProtocol?
     var presenter: AnyPresenter?
+    private var cancallables = Set<AnyCancellable>()
     
     func getUsers() {
-        guard let url = URL(string: "https://jsonplaceholder.typicode.com/users") else {
-            return
-        }
-        let task = URLSession.shared.dataTask(with: url) {[weak self] data, _, error in
-            guard let self = self else { return }
-            guard let data = data, error == nil else {
-                self.presenter?.interactorDidFetchUsers(with: .failure(FetchError.failed))
-                return
-            }
-            do {
-                let entities = try JSONDecoder().decode(Users.self, from: data)
+        userService?.fetchUsers()
+            .receive(on: DispatchQueue.main)
+            .sink { response in
+                switch response {
+                case .failure(let error):
+                    self.presenter?.interactorDidFetchUsers(with: .failure(error))
+                case .finished:
+                    debugPrint("process Finished")
+                }
+            } receiveValue: { entities in
                 self.presenter?.interactorDidFetchUsers(with: .success(entities))
-            } catch {
-                self.presenter?.interactorDidFetchUsers(with: .failure(error))
             }
-        }
-        task.resume()
+            .store(in: &self.cancallables)
+        
         
     }
 }

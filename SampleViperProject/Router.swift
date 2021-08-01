@@ -19,23 +19,25 @@ protocol AnyRouter {
 class UserRouter: AnyRouter {
     var entry: EntryPoint?
     
+    
     static func start() -> AnyRouter {
         let router = UserRouter()
         // Assign VIP
         var view: AnyView = UserViewController()
-        var presenter: AnyPresenter = UserPresenter()
-        var interactor: AnyInteractor = UserInteractor()
-        
-        view.presenter = presenter
-        
-        interactor.presenter = presenter
-        
-        presenter.view = view
-        presenter.router = router
-        presenter.interactor = interactor
+            var presenter: AnyPresenter = UserPresenter()
+            var interactor: AnyInteractor = UserInteractor()
+            
+            view.presenter = presenter
+            
+        interactor.userService = UserService()
+            interactor.presenter = presenter
+            
+            presenter.view = view
+            presenter.router = router
+            presenter.interactor = interactor
 
-        router.entry = view as? EntryPoint
-        
+            router.entry = view as? EntryPoint
+            
         return router
     }
 }
